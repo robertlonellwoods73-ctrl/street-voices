@@ -103,7 +103,8 @@ async def speak_line(character, text, output_file):
         text=text,
         voice=v["voice"],
         pitch=v["pitch"],
-        rate=v["rate"]
+        rate=v["rate"],
+        language="en-US"
     )
     await communicate.save(output_file)
 
