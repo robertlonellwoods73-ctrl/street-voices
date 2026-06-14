@@ -99,6 +99,10 @@ def parse_script(script_text):
 
 async def speak_line(character, text, output_file):
     """Generate speech audio with retry logic for edge-tts reliability."""
+    # Validate that text is not empty to prevent NoAudioReceived errors
+    if not text or not text.strip():
+        raise ValueError(f"Cannot synthesize empty text for {character}")
+    
     v = VOICES[character]
     max_retries = 3
     retry_count = 0
