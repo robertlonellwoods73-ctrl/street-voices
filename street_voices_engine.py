@@ -98,15 +98,28 @@ def parse_script(script_text):
     return lines
 
 async def speak_line(character, text, output_file):
+    """Generate speech audio with retry logic for edge-tts reliability."""
     v = VOICES[character]
-    communicate = edge_tts.Communicate(
-        text=text,
-        voice=v["voice"],
-        pitch=v["pitch"],
-        rate=v["rate"],
-        language="en-US"
-    )
-    await communicate.save(output_file)
+    max_retries = 3
+    retry_count = 0
+    
+    while retry_count < max_retries:
+        try:
+            communicate = edge_tts.Communicate(
+                text=text,
+                voice=v["voice"],
+                pitch=v["pitch"],
+                rate=v["rate"]
+            )
+            await communicate.save(output_file)
+            return  # Success
+        except Exception as e:
+            retry_count += 1
+            if retry_count < max_retries:
+                print(f"⚠️ TTS retry {retry_count}/{max_retries} for {character}...")
+                await asyncio.sleep(2)  # Wait before retry
+            else:
+                raise Exception(f"TTS failed for {character} after {max_retries} retries: {str(e)}")
 
 async def generate_all_voices(lines, episode_num):
     os.makedirs(f"./episodes/ep{episode_num}/segments", exist_ok=True)
