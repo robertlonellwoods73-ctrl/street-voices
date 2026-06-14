@@ -1,0 +1,45 @@
+name: Street Voices Autopilot
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  generate_episode:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: street-voices-${{ hashFiles('requirements.txt') }}
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y ffmpeg
+          pip install -r requirements.txt
+
+      - name: Generate episode
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: python autopilot.py
+
+      - name: Commit new episode to repo
+        run: |
+          git config user.name "Street Voices Bot"
+          git config user.email "bot@streetvoices.com"
+          git add episodes/ export/ feed.xml || true
+          git diff --staged --quiet || git commit -m "🎙️ Auto-generated new episode"
+          git push
