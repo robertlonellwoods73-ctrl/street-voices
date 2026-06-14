@@ -7,13 +7,13 @@ VOICES = {
     "DIAMOND":    {"voice": "en-US-AriaNeural",        "pitch": "+5Hz",  "rate": "+15%"},
     "LOCO":       {"voice": "en-US-TonyNeural",        "pitch": "0Hz",   "rate": "+25%"},
     "PEACHES":    {"voice": "en-US-AmberNeural",       "pitch": "+8Hz",  "rate": "-5%"},
-    "STACKS":     {"voice": "en-US-DavisNeural",       "pitch": "-8Hz",  "rate": "-10%"},
-    "RED":        {"voice": "en-US-ChristopherNeural", "pitch": "-12Hz", "rate": "-18%"},
+    "STACKS":     {"voice": "en-US-ArthurNeural",      "pitch": "-8Hz",  "rate": "-10%"},
+    "RED":        {"voice": "en-US-BrianNeural",       "pitch": "-12Hz", "rate": "-18%"},
     "CHINA DOLL": {"voice": "en-US-JennyNeural",       "pitch": "+3Hz",  "rate": "+5%"},
     "BUBBA":      {"voice": "en-US-TonyNeural",        "pitch": "+2Hz",  "rate": "+20%"},
-    "NOVA":       {"voice": "en-US-JennyNeural",       "pitch": "+3Hz",  "rate": "+8%"},
-    "GHOST":      {"voice": "en-US-AndrewNeural",      "pitch": "-5Hz",  "rate": "-15%"},
-    "TOYA":       {"voice": "en-US-MonicaNeural",      "pitch": "+6Hz",  "rate": "+8%"},
+    "NOVA":       {"voice": "en-US-AmandaNeural",      "pitch": "+3Hz",  "rate": "+8%"},
+    "GHOST":      {"voice": "en-US-MonicaNeural",      "pitch": "-5Hz",  "rate": "-15%"},
+    "TOYA":       {"voice": "en-US-AvaNeural",         "pitch": "+6Hz",  "rate": "+8%"},
     "KING":       {"voice": "en-US-BrianNeural",       "pitch": "-10Hz", "rate": "-12%"},
 }
 
