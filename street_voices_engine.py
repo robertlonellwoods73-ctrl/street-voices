@@ -80,7 +80,7 @@ No stage directions. No asterisks. Dialogue only.
 Write approximately 3500 words. Raw, authentic street vernacular."""
 
     response = client.chat.completions.create(
-        model="llama3-70b-8192",
+        model="llama-3.3-70b-versatile",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=4000
     )
