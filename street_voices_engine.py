@@ -12,7 +12,7 @@ VOICES = {
     "CHINA DOLL": {"voice": "en-US-JennyNeural",       "pitch": "+3Hz",  "rate": "+5%"},
     "BUBBA":      {"voice": "en-US-TonyNeural",        "pitch": "+2Hz",  "rate": "+20%"},
     "NOVA":       {"voice": "en-US-AmandaNeural",      "pitch": "+3Hz",  "rate": "+8%"},
-    "GHOST":      {"voice": "en-US-MonicaNeural",      "pitch": "-5Hz",  "rate": "-15%"},
+    "GHOST":      {"voice": "en-US-AvaNeural",         "pitch": "-5Hz",  "rate": "-15%"},
     "TOYA":       {"voice": "en-US-AvaNeural",         "pitch": "+6Hz",  "rate": "+8%"},
     "KING":       {"voice": "en-US-BrianNeural",       "pitch": "-10Hz", "rate": "-12%"},
 }
@@ -119,9 +119,10 @@ async def speak_line(character, text, output_file):
             return  # Success
         except Exception as e:
             retry_count += 1
+            wait_time = 2 ** retry_count  # Exponential backoff: 2s, 4s, 8s
             if retry_count < max_retries:
-                print(f"⚠️ TTS retry {retry_count}/{max_retries} for {character}...")
-                await asyncio.sleep(2)  # Wait before retry
+                print(f"⚠️ TTS retry {retry_count}/{max_retries} for {character} (waiting {wait_time}s)...")
+                await asyncio.sleep(wait_time)
             else:
                 raise Exception(f"TTS failed for {character} after {max_retries} retries: {str(e)}")
 
