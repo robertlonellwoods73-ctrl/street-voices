@@ -32,3 +32,5 @@ jobs:
       run: |
         conda install pytest
         pytest
+- name: Claude Code Action Official
+  uses: anthropics/claude-code-action@v1
